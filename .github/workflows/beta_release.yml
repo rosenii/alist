@@ -1,8 +1,25 @@
 name: beta release
 
+# 定义触发事件
 on:
-  push:
-    branches: [ 'main' ]
+  # 1. 允许手动触发 (这是您需要的)
+  workflow_dispatch:
+    inputs:
+      # 定义一个输入参数，用于在手动触发时指定目标分支
+      target_branch:
+        description: 'Target branch for the beta release'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - main
+          - develop
+          - staging
+  
+  # 2. 也可以添加其他自动触发事件，例如在 push 到 develop 分支时自动运行
+  # push:
+  #   branches:
+  #     - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
