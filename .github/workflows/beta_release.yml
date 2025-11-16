@@ -17,9 +17,9 @@ on:
           - staging
   
   # 2. 也可以添加其他自动触发事件，例如在 push 到 develop 分支时自动运行
-  # push:
-  #   branches:
-  #     - develop
+  push:
+     branches:
+       - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
